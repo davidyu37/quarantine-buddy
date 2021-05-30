@@ -39,7 +39,7 @@ export default function Topic() {
             <AnswerCard/>
             <AnswerCard/>
         </main>
-        <FloatingButton text="回答"></FloatingButton>
+        <FloatingButton text="回答" link="/answer"></FloatingButton>
     </div>
   )
 }

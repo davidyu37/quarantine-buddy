@@ -15,7 +15,7 @@ export default function Home() {
          如何宅?
         </h1>
 
-        <FloatingButton text="問問題"></FloatingButton>
+        <FloatingButton text="問問題" link="/question"></FloatingButton>
         <TopicCard />
       </main>
 

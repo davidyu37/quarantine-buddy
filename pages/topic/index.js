@@ -39,7 +39,8 @@ export default function Topic() {
             <AnswerCard/>
             <AnswerCard/>
         </main>
-        <FloatingButton text="回答" link="/answer"></FloatingButton>
+        {/* Give answer page the topic id to display question */}
+        <FloatingButton text="回答" link="/answer?id=123"></FloatingButton>
     </div>
   )
 }

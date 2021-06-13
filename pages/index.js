@@ -1,8 +1,14 @@
 import Head from 'next/head';
 import FloatingButton from '../components/FloatingButton';
 import TopicCard from '../components/TopicCard';
+import { useEntries } from '../lib/swr-hooks';
+
 
 export default function Home() {
+  const { entries, isLoading } = useEntries()
+
+  console.log(entries);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>

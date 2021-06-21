@@ -25,22 +25,48 @@ async function query(q) {
   }
 }
 
-// Create "entries" table if doesn't exist
 async function migrate() {
   try {
+    // Create "topics" table if doesn't exist
     await query(`
-    CREATE TABLE IF NOT EXISTS entries (
+    CREATE TABLE IF NOT EXISTS topics (
       id INT AUTO_INCREMENT PRIMARY KEY,
       title TEXT NOT NULL,
       content TEXT NOT NULL,
+      author TEXT NOT NULL,
+      avatarUrl TEXT NOT NULL,
       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at 
-        TIMESTAMP 
-        NOT NULL 
-        DEFAULT CURRENT_TIMESTAMP 
-        ON UPDATE CURRENT_TIMESTAMP
-    )
-    `)
+      TIMESTAMP 
+      NOT NULL 
+      DEFAULT CURRENT_TIMESTAMP 
+      ON UPDATE CURRENT_TIMESTAMP
+      )
+      `);
+    // Create "answers" table if doesn't exist
+    await query(`
+    CREATE TABLE IF NOT EXISTS answers (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      content TEXT NOT NULL,
+      author TEXT NOT NULL,
+      avatarUrl TEXT NOT NULL,
+      topicId INT NOT NULL,
+      INDEX topicIndex (topicId),
+      FOREIGN KEY (topicId) REFERENCES topics(id)
+    )`);
+    // Create "votes" table if doesn't exist
+    await query(`
+    CREATE TABLE IF NOT EXISTS votes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      author TEXT NOT NULL,
+      topicId INT NOT NULL,
+      answerId INT NOT NULL,
+      INDEX topicIndex (topicId),
+      FOREIGN KEY (topicId) REFERENCES topics(id),
+      INDEX answerIndex (answerId),
+      FOREIGN KEY (answerId) REFERENCES answers(id)
+    )`);
+      
     console.log('migration ran successfully')
   } catch (e) {
     console.error(e);

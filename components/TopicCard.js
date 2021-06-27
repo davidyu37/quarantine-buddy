@@ -1,24 +1,27 @@
 import Link from 'next/link';
 
-export default function TopicCard(props) {
+export default function TopicCard({topic}) {
+
+    // TODO: Handle when topic is null or undefined
+    if(!topic) return null;
 
     return (
 
         <Link href={`/topic?id=123`}>
-            <div className="flex flex-col bg-white shadow-lg rounded-lg mx-4 md:mx-auto max-w-md md:max-w-2xl mt-10 p-4">
+            <div className="flex flex-col bg-white shadow-lg rounded-lg mx-4 md:mx-auto max-w-md md:max-w-2xl mt-10 p-4" style={{minWidth: '90%'}}>
                 <div className="flex" style={{justifyContent: 'space-between', alignItems: 'center'}}>
                     <h2 className="text-2xl font-bold">
-                        #哪裡買菜?
+                        #{topic.title}
                     </h2>
                     <small className="text-sm text-gray-700">22h ago</small>
                 </div>
                 <div className="flex py-4 items-center">
                     <img className="w-8 h-8 rounded-full object-cover mr-4 shadow" src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar" />
-                    <h2 className="text-lg font-semibold text-gray-900 -mt-1">匿名的人</h2>
+                    <h2 className="text-lg font-semibold text-gray-900 -mt-1">{topic.author}</h2>
                 </div>
                 <div>
                     <p className="text-gray-700 text-sm">
-                        Lorem ipsum, dolor sit amet conse. Saepe optio minus rem dolor sit amet!
+                        {topic.content}
                     </p>
                     <div className="mt-4 flex items-center" style={{justifyContent: 'space-between'}}>
                         <div className="flex mr-2 text-gray-700 text-sm mr-8">

@@ -1,13 +1,15 @@
 import Head from 'next/head';
 import FloatingButton from '../components/FloatingButton';
 import TopicCard from '../components/TopicCard';
-import { useEntries } from '../lib/swr-hooks';
+import { useTopics } from '../lib/swr-hooks';
 
 
 export default function Home() {
-  const { entries, isLoading } = useEntries()
+  const { topics, isLoading } = useTopics()
 
-  console.log(entries);
+  // TODO: Handle Loading
+
+  console.log(topics);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -22,7 +24,12 @@ export default function Home() {
         </h1>
 
         <FloatingButton text="問問題" link="/question"></FloatingButton>
-        <TopicCard />
+        {topics.map(topic => {
+          return (
+            <TopicCard topic={topic} />
+          )
+        })}
+        
       </main>
 
     </div>

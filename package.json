@@ -9,6 +9,7 @@
     "migrate": "node scripts/migrate-db.js"
   },
   "dependencies": {
+    "bad-words-chinese": "^1.0.2",
     "dotenv": "^8.2.0",
     "next": "latest",
     "react": "^17.0.1",
